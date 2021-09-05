@@ -44,8 +44,8 @@ filename = "Videos/" + datetime.now().strftime("%Y-%m-%d-%H-%M-%S") + ".mp4"
 output = cv2.VideoWriter(filename, vid_cod, 20.0, (640,360))
 
 # Connect to the Vehicle
-vehicle = connect('/dev/ttyUSB0', wait_ready=True, baud=115200)
-#vehicle = connect('127.0.0.1:14550', wait_ready=True)
+# vehicle = connect('/dev/ttyUSB0', wait_ready=True, baud=115200)
+vehicle = connect('127.0.0.1:14550', wait_ready=True)
 
 cmds = vehicle.commands
 cmds.download()
@@ -111,7 +111,6 @@ def move_target_drop(cX, cY, channel, pwm, waypoint):
         send_nav_velocity(0, 0, 0)
         vel_y = 0
         vel_x = 0
-        servo(6, 1900)
         dropnextwaypoint = True
         vehicle.mode = VehicleMode("AUTO")
     send_nav_velocity(vel_y, vel_x, vel_z)
@@ -221,10 +220,10 @@ while (True):
                 cv2.circle(img, (cX, cY), 7, (255, 255, 255), -1)
                 if (nextwaypoint == 3):
                       move_target_drop(cX, cY, 5, 1700, nextwaypoint)
-                # if (nextwaypoint == 4):
-                    # move_target_drop(cX, cY, 5, 2400, nextwaypoint)
-                # if (nextwaypoint == 5):
-                    # move_target_drop(cX, cY, 6, 1700, nextwaypoint)
+                if (nextwaypoint == 4):
+                      move_target_drop(cX, cY, 5, 2400, nextwaypoint)
+                if (nextwaypoint == 5):
+                      move_target_drop(cX, cY, 6, 1700, nextwaypoint)
                 # if (nextwaypoint == 6):
                 #     move_target_drop(cX, cY, 6, 2400, nextwaypoint)
                 # if (nextwaypoint == 7):
